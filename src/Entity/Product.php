@@ -39,12 +39,12 @@ class Product
         return $this->id;
     }
 
-    public function getProductName(): ?string
+    public function getName(): ?string
     {
         return $this->name;
     }
 
-    public function setProductName(string $name): static
+    public function setName(string $name): static
     {
         $this->name = $name;
 
