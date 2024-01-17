@@ -5,5 +5,20 @@
 {% block content %}
     <div class="container page-content">
         Le site est en cours de construction
+
+            {% if products is not empty %}
+        <h2>Résultats de la recherche :</h2>
+        <ul>
+            {% for product in products %}
+                <li>{{ product.name }} - {{ product.description }}</li>
+            {% endfor %}
+        </ul>
+    {% elseif searchPerformed %}
+        <p class="text-center fw-bold">Aucun résultat ne correspond à votre recherche.</p>
+    {% endif %}
     </div>
+
+
 {% endblock %}
+
+

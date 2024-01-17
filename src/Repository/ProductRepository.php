@@ -45,4 +45,13 @@ class ProductRepository extends ServiceEntityRepository
 //            ->getOneOrNullResult()
 //        ;
 //    }
+
+    public function findByKeyword($keyword)
+    {
+        $qb = $this->createQueryBuilder('p');
+        $qb->where($qb->expr()->like('p.name', ':keyword'))
+        ->setParameter('keyword', '%' . $keyword . '%');
+
+        return $qb->getQuery()->getResult();
+    }
 }
