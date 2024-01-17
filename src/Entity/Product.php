@@ -25,13 +25,13 @@ class Product
     #[ORM\OneToMany(mappedBy: 'product', targetEntity: Fds::class, orphanRemoval: true)]
     private Collection $fds;
 
-    #[ORM\OneToMany(mappedBy: 'product', targetEntity: UserProductAccess::class, orphanRemoval: true)]
-    private Collection $userProductAccesses;
+    #[ORM\ManyToMany(targetEntity: User::class, mappedBy: 'products')]
+    private Collection $users;
 
     public function __construct()
     {
         $this->fds = new ArrayCollection();
-        $this->userProductAccesses = new ArrayCollection();
+        $this->users = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -94,30 +94,27 @@ class Product
     }
 
     /**
-     * @return Collection<int, UserProductAccess>
+     * @return Collection<int, User>
      */
-    public function getUserProductAccesses(): Collection
+    public function getUsers(): Collection
     {
-        return $this->userProductAccesses;
+        return $this->users;
     }
 
-    public function addUserProductAccess(UserProductAccess $userProductAccess): static
+    public function addUser(User $user): static
     {
-        if (!$this->userProductAccesses->contains($userProductAccess)) {
-            $this->userProductAccesses->add($userProductAccess);
-            $userProductAccess->setProduct($this);
+        if (!$this->users->contains($user)) {
+            $this->users->add($user);
+            $user->addProduct($this);
         }
 
         return $this;
     }
 
-    public function removeUserProductAccess(UserProductAccess $userProductAccess): static
+    public function removeUser(User $user): static
     {
-        if ($this->userProductAccesses->removeElement($userProductAccess)) {
-            // set the owning side to null (unless already changed)
-            if ($userProductAccess->getProduct() === $this) {
-                $userProductAccess->setProduct(null);
-            }
+        if ($this->users->removeElement($user)) {
+            $user->removeProduct($this);
         }
 
         return $this;
