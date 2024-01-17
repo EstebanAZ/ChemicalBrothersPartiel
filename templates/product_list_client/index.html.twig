@@ -1,0 +1,42 @@
+{% extends 'base_header_footer.html.twig' %}
+
+{% block title %}ChemicalBrothers{% endblock %}
+
+{% block content %}
+
+        <div class="container page-content">
+        <span class="h5 text-primary table-title-text"> Produits disponibles : </span>
+            <div class="table-responsive table-align mt-5">
+                <table>
+                    <thead>
+                        <tr>
+                            <th scope="col" style="padding-left: 5px;"> Nom </th>
+                            <th scope="col" class="text-end"> FDS </th>
+                        </tr>
+                    </thead>
+                </table>
+                
+                <div class="container">
+                    <div class="product-span row">
+                        <span class="col"> Ethanol </span>
+                        <span class="col text-end"><a href="others/FicheTox_48.pdf" target="_blank" download="ethanolfds"/><img src="images/plusicon.png" class="plus-icon"/></a></span>
+                    </div>
+                    <div class="product-span row">
+                        <span class="col"> Chlore </span>
+                        <span class="col text-end"><a href="others/FicheTox_51.pdf" target="_blank" download="chlorefds"/><img src="images/plusicon.png" class="plus-icon"/></a></span>
+                    </div>
+                    <div class="product-span row">
+                        <span class="col"> Test </span>
+                        <span class="col text-end"><img src="images/plusicon.png" class="plus-icon"/></span>
+                    </div>
+                    <div class="product-span row">
+                        <span class="col"> Test </span>
+                        <span class="col text-end"><img src="images/plusicon.png" class="plus-icon"/></span>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+   
+
+{% endblock %}
