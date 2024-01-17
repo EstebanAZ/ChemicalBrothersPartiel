@@ -8,3 +8,23 @@ body {
         min-height: calc(100vh - 180px);
     }
 }
+
+.login-background-image {
+    background: url(../../../App/public/images/bg2.jpg);
+    height: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.logo-image-login {
+    display: flex;
+    margin: auto;
+    background-position: center;
+    background-size: cover;
+    width: 60%;
+    height: 60%;
+    padding: 1px;
+    position: relative;
+    bottom: 25px;
+}
