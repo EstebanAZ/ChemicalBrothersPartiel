@@ -23,6 +23,10 @@
 				</div>
 				<input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
 
+				<p class="text-center">
+					<a href="{{ path('app_forgot_password_request') }}">Mot de passe oublié ?</a>
+				</p>
+
 
 				<button class="btn btn-primary w-100 py-2" type="submit">Se connecter</button>
 			</form>
