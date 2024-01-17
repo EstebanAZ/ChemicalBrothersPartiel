@@ -35,16 +35,16 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(length: 255)]
     private ?string $username = null;
 
-    #[ORM\OneToMany(mappedBy: 'client', targetEntity: UserProductAccess::class, orphanRemoval: true)]
-    private Collection $UserProductAccess;
-
     #[ORM\OneToMany(mappedBy: 'client', targetEntity: Notification::class, orphanRemoval: true)]
     private Collection $notifications;
 
+    #[ORM\ManyToMany(targetEntity: Product::class, inversedBy: 'users')]
+    private Collection $products;
+
     public function __construct()
     {
-        $this->UserProductAccess = new ArrayCollection();
         $this->notifications = new ArrayCollection();
+        $this->products = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -130,36 +130,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     }
 
     /**
-     * @return Collection<int, UserProductAccess>
-     */
-    public function getUserProductAccess(): Collection
-    {
-        return $this->UserProductAccess;
-    }
-
-    public function addUserProductAccess(UserProductAccess $userProductAccess): static
-    {
-        if (!$this->UserProductAccess->contains($userProductAccess)) {
-            $this->UserProductAccess->add($userProductAccess);
-            $userProductAccess->setClient($this);
-        }
-
-        return $this;
-    }
-
-    public function removeUserProductAccess(UserProductAccess $userProductAccess): static
-    {
-        if ($this->UserProductAccess->removeElement($userProductAccess)) {
-            // set the owning side to null (unless already changed)
-            if ($userProductAccess->getClient() === $this) {
-                $userProductAccess->setClient(null);
-            }
-        }
-
-        return $this;
-    }
-
-    /**
      * @return Collection<int, Notification>
      */
     public function getNotifications(): Collection
@@ -185,6 +155,30 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
                 $notification->setClient(null);
             }
         }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Product>
+     */
+    public function getProducts(): Collection
+    {
+        return $this->products;
+    }
+
+    public function addProduct(Product $product): static
+    {
+        if (!$this->products->contains($product)) {
+            $this->products->add($product);
+        }
+
+        return $this;
+    }
+
+    public function removeProduct(Product $product): static
+    {
+        $this->products->removeElement($product);
 
         return $this;
     }
