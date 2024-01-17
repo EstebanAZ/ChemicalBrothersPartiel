@@ -13,8 +13,15 @@ L'entreprise ChemicalBrothers souhaite mettre en place une GED pour mettre à di
 
 ## Database Configuration
 
-1. Create an empty MySQL database.
-2. Configure the database connection information in the `.env` file.
+1. Create a new file `.env.local`.
+2. Open the `.env.local` file and update the following line with your MySQL database connection information:
+    ```
+    DATABASE_URL=mysql://your_username:your_password@your_host:your_port/your_database_name?serverVersion=8.0.32&charset=utf8mb4
+    ```
+3. Run the following command to create the MySQL database.
+    ```shel
+    php bin/console doctrine:database:create
+    ``````
 
 ## Database Migration
 
