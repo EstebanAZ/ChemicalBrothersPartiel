@@ -30,6 +30,13 @@ L'entreprise ChemicalBrothers souhaite mettre en place une GED pour mettre à di
     php bin/console doctrine:migrations:migrate
     ```
 
+## Loading Fixtures
+
+1. Run the following command to load the fixtures into the database:
+    ```shell
+    php bin/console doctrine:fixtures:load
+    ```
+
 ## Webpack Build
 
 1. Install the required Node.js packages:
