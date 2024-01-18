@@ -16,9 +16,6 @@ class Fds
     #[ORM\Column(length: 255)]
     private ?string $path = null;
 
-    #[ORM\Column(nullable: true)]
-    private ?\DateTimeImmutable $updated_at = null;
-
     #[ORM\Column]
     private ?\DateTimeImmutable $created_at = null;
 
@@ -26,7 +23,7 @@ class Fds
     private ?self $parent = null;
 
     #[ORM\ManyToOne(inversedBy: 'fds')]
-    #[ORM\JoinColumn(nullable: false)]
+    #[ORM\JoinColumn(nullable: true)]
     private ?Product $product = null;
 
     public function getId(): ?int
@@ -42,18 +39,6 @@ class Fds
     public function setPath(string $path): static
     {
         $this->path = $path;
-
-        return $this;
-    }
-
-    public function getUpdatedAt(): ?\DateTimeImmutable
-    {
-        return $this->updated_at;
-    }
-
-    public function setUpdatedAt(?\DateTimeImmutable $updated_at): static
-    {
-        $this->updated_at = $updated_at;
 
         return $this;
     }

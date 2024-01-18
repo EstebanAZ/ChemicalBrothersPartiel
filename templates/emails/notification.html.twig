@@ -1,0 +1,9 @@
+<h1>Bonjour {{ user.username }}</h1>
+
+<p>Une feuille de sécurité liée au produit "{{ fds.product.name }}" vient d'être modifiée !</p>
+
+<p>Vous pouvez la consulter en cliquant sur le lien suivant :</p>
+
+<a href="{{ path('app_admin_fds_download', { 'id': fds.id }) }}">voir la feuille de sécurité !</a>
+
+<p>Merci !</p>
