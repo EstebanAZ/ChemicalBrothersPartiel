@@ -2,9 +2,20 @@
 
 {% block title %}ChemicalBrothers{% endblock %}
 
+{% block searchBar %}
+    {{ form_start(formSearch, {'attr': {'class': 'form-inline my-2 my-lg-0'}}) }}
+    {{ form_row(formSearch.keyword, {'label': false, 'attr': {'class': 'form-control mr-sm-2', 'placeholder':'Rechercher un produit'}}) }}
+    {{ form_end(formSearch) }}
+{% endblock %}
+
 {% block content %}
     <div class="container page-content">
-        <h3 class="text-primary table-title-text">Liste des produits : </h3>
+        <h3 class="text-primary table-title-text">{{ search ? 'Liste des résultats pour la recherche : '~search :'Liste des produits : ' }}</h3>
+        {% if products|length == 0  %}
+            <div class="alert alert-warning mt-5 mx-5" role="alert">
+                Aucun résultat pour la recherche : {{ search }}
+            </div>
+        {% endif %}
         {% for product in products %}
             <div class="product-span row">
                 <span class="col">{{ product.name }}</span>

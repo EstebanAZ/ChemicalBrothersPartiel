@@ -35,15 +35,30 @@ class ProductRepository extends ServiceEntityRepository
             ->getResult();
     }
 
-    public function findProductsForUser(User $user): array
+    public function findProductsForUser($user, $search = null)
     {
-        return $this->createQueryBuilder('p')
+        $qb = $this->createQueryBuilder('p')
             ->join('p.users', 'u')
             ->where('u = :user')
-            ->setParameter('user', $user)
-            ->getQuery()
-            ->getResult();
+            ->setParameter('user', $user);
+
+        if ($search) {
+            $qb->andWhere('p.name LIKE :search')
+            ->setParameter('search', '%' . $search . '%');
+        }
+
+        return $qb->getQuery()->getResult();
     }
+
+    // public function findProductsForUser(User $user): array
+    // {
+    //     return $this->createQueryBuilder('p')
+    //         ->join('p.users', 'u')
+    //         ->where('u = :user')
+    //         ->setParameter('user', $user)
+    //         ->getQuery()
+    //         ->getResult();
+    // }
 //    public function findByExampleField($value): array
 //    {
 //        return $this->createQueryBuilder('p')
