@@ -46,7 +46,7 @@ class AppFixtures extends Fixture
             //création des notifications
             $notification = new Notification();
             $notification->setClient($user);
-            $notification->setMessage("Mise à jour de la feuile de sécurité du produit : ".$product->getName());
+            $notification->setMessage("Mise à jour de la feuille de sécurité du produit : ".$product->getName());
             $notification->setCreatedAt(new \DateTimeImmutable());
             $notification->setIsRead(false);    
             $manager->persist($notification);

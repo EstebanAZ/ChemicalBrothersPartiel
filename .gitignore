@@ -30,3 +30,7 @@
 npm-debug.log
 yarn-error.log
 ###< symfony/webpack-encore-bundle ###
+
+###> répertoire privé ###
+/private/
+###< répertoire privé ###
