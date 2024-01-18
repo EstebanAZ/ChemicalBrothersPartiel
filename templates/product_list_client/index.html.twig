@@ -13,7 +13,11 @@
         <h3 class="text-primary table-title-text">{{ search ? 'Liste des résultats pour la recherche : '~search :'Liste des produits : ' }}</h3>
         {% if products|length == 0  %}
             <div class="alert alert-warning mt-5 mx-5" role="alert">
-                Aucun résultat pour la recherche : {{ search }}
+                {% if search is not empty %}
+                    Aucun résultat pour la recherche : {{ search }}
+                {% else %}
+                    Vous n'avez accès à aucun produit pour le momment
+                {% endif %}
             </div>
         {% endif %}
         {% for product in products %}
