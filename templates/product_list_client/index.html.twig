@@ -3,17 +3,18 @@
 {% block title %}ChemicalBrothers{% endblock %}
 
 {% block content %}
-    <div class="container">
-        <h3 class="text-primary table-title-text">Liste de produits : </h3>
+    <div class="container page-content">
+        <h3 class="text-primary table-title-text">Liste des produits : </h3>
         {% for product in products %}
             <div class="product-span row">
                 <span class="col">{{ product.name }}</span>
                 <span class="col text-end">
-                    {% for fds in product.fds %}
-                        <a href="{{ fds.path }}" download="{{ product.name|replace({' ': ''}) }}.pdf">
-                            <img src="images/plusicon.png" class="plus-icon"/>
+                    {% set latestFds = product.fds|sort((a, b) => b.id <=> a.id)|first %}
+                    {% if latestFds %}
+                        <a class="btn btn-outline-secondary" href="{{ path('app_fds_view', {'id': latestFds.id}) }}" target="_blank">
+                            <i class="fa-solid fa-download"></i>
                         </a>
-                    {% endfor %}
+                    {% endif %}
                 </span>
             </div>
             <hr class="products-line">
