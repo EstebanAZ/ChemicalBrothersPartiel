@@ -17,7 +17,7 @@
          <span class="badge text-bg-primary rounded-pill">Client</span>
     {% endif %}
 </p>
-<p class="fs-4">Accès aux produits :
+<p class="fs-4 product-access">Accès aux produits :
     {% if user.products|length is same as 0 %}-{% endif %}
     {% for product in user.products %}
         <span class="badge text-bg-success rounded-pill">{{ product.name }}</span>

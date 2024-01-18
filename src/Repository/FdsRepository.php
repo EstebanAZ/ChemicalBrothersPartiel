@@ -21,6 +21,20 @@ class FdsRepository extends ServiceEntityRepository
         parent::__construct($registry, Fds::class);
     }
 
+    public function isFdsAccessible($user, $product)
+    {
+        $qb = $this->createQueryBuilder('f');
+    
+        $qb->innerJoin('f.product', 'p')
+           ->innerJoin('p.users', 'u')
+           ->where('u.id = :userId')
+           ->andWhere('p.id = :productId')
+           ->setParameter('userId', $user->getId())
+           ->setParameter('productId', $product->getId());
+    
+        return count($qb->getQuery()->getResult()) > 0;
+    }
+
 //    /**
 //     * @return Fds[] Returns an array of Fds objects
 //     */

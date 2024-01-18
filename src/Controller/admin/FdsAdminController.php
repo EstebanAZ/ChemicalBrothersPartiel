@@ -50,17 +50,23 @@ class FdsAdminController extends AbstractController
             
             $fds = $form->getData();
 
+            // Enregistrement du fichier de la FDS dans un répertoire sécurisée
+            $file = $form->get('file')->getData();
+            $fileName = 'fds_' . uniqid() . '.' . $file->guessExtension();
+
+            $file->move(
+                $this->getParameter('fds_directory'),
+                $fileName
+            );
+
             if(!isset($new)){
                 $newFds = new Fds();
                 $newFds->setParent($fds);
                 $newFds->setProduct($fds->getProduct());
                 $newFds->setCreatedAt(new \DateTimeImmutable());
 
-                // todo : enregistrement du fichier de la FDS dans un répertoire sécurisée
-                $newFds->setPath('');
+                $newFds->setPath($fileName);
                 $em->persist($newFds);
-                
-                $fds->setProduct(null);
                 $em->persist($fds);
 
                 $em->flush();
@@ -72,8 +78,9 @@ class FdsAdminController extends AbstractController
                     $notification = new Notification();
                     $notification->setClient($user);
                     $notification->setCreatedAt(new \DateTimeImmutable());
-                    $notification->setMessage('La fiche de sécurité du produit '.$newFds->getProduct()->getName().' a été modifiée. Vous pouvez la consulter en cliquant sur le lien ci-dessous. <br> <a href="'.$this->generateUrl('app_admin_fds_download', ['id' => $newFds->getId()]).'">Télécharger la fiche de sécurité</a>');
+                    $notification->setMessage('Mise à jour de la feuille de sécurité du produit :'.$newFds->getProduct()->getName());
                     $em->persist($notification);
+                    $em->flush();
 
                     // Envoi d'un mail
                     $mail = new TemplatedEmail();
@@ -91,7 +98,7 @@ class FdsAdminController extends AbstractController
             else{
                 // création d'une nouvelle fds
                 $fds->setCreatedAt(new \DateTimeImmutable());
-                $fds->setPath('');
+                $fds->setPath($fileName);
                 $em->persist($fds);
 
                 $em->flush();

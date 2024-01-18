@@ -30,7 +30,7 @@
                    <span class="badge text-bg-primary rounded-pill">Client</span>
                 {% endif %}
                 </td>
-                <td>
+                <td style="max-width: 200px;overflow: auto;">
                     {% if user.products|length is same as 0 %}-{% endif %}
                     
                     {% for product in user.products %}
