@@ -8,3 +8,70 @@ body {
         min-height: calc(100vh - 180px);
     }
 }
+
+.login-background-image {
+    background: url(../../../App/public/images/bg2.jpg);
+    height: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.logo-image-login {
+    display: flex;
+    margin: auto;
+    background-position: center;
+    background-size: cover;
+    width: 60%;
+    height: 60%;
+    padding: 1px;
+    position: relative;
+    bottom: 25px;
+}
+
+.table-align {
+    margin: auto;
+    width: 50% !important;
+    position: relative;
+ }
+
+.table-title-text {
+    margin-left: 20%;
+    position: relative;
+    top: 30px !important;
+}
+
+table {
+    width: 94%;
+    padding: 5px;
+}
+
+.product-span {
+    display: flex;
+    align-items: center;
+    align-self: center;
+    justify-content: start;
+    width: 100%;
+    height: 50px;
+    border-radius: 15px;
+    background-color: #1eb3d1ab;
+    padding: 5px;
+    margin-top: 3%;
+    margin-bottom: 3%;
+    font-weight: 600;
+}
+
+.plus-icon {
+    width: 24px;
+    height: 24px;
+    transition: 0.2s;
+}
+
+.plus-icon:hover {
+    cursor: pointer;
+    filter: invert(100%);
+    transition: 0.2s;
+    width: 26px;
+    height: 26px;
+}
+

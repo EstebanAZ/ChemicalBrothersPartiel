@@ -4,8 +4,12 @@
   },
   "devDependencies": {
     "@symfony/webpack-encore": "^4.5.0",
+    "autoprefixer": "^10.4.16",
+    "css-loader": "^6.9.0",
+    "postcss-loader": "^7.3.4",
     "sass": "^1.69.7",
     "sass-loader": "^13.3.3",
+    "style-loader": "^3.3.4",
     "webpack-notifier": "^1.15.0"
   },
   "scripts": {
