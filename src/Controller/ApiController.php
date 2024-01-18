@@ -10,10 +10,7 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class ApiController extends AbstractController
 {
-    // créer un eroute api pour marquer une notification comme étant lue
-    /**
-     * @Route("/api/notification/{id}/read", name="api_notification_read", methods={"POST"})
-     */
+    #[Route('/api/notification/{id}/read', name: 'api_notification_read', methods: ['POST'])]
     public function readNotification(Notification $notification, EntityManagerInterface $em): Response
     {
         // si la notification n'existe pas
