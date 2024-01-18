@@ -27,32 +27,7 @@ class AppFixtures extends Fixture
             $user->setPassword('password'.$i);
             $user->addProduct($product);
             $manager->persist($user);
-
-            //création des fds
-            $fds = new Fds();
-            $fds->setProduct($product);
-            $fds->setPath('path/'.$i.'.pdf');
-            $fds->setCreatedAt(new \DateTimeImmutable());
-            $manager->persist($fds);
-
-            //création des fds enfants
-            $fdsChild = new Fds();
-            $fdsChild->setProduct($product);
-            $fdsChild->setPath('path/'.$i.'.pdf');
-            $fdsChild->setCreatedAt(new \DateTimeImmutable());
-            $fdsChild->setParent($fds);
-            $manager->persist($fdsChild);
-
-            //création des notifications
-            $notification = new Notification();
-            $notification->setClient($user);
-            $notification->setMessage("Mise à jour de la feuille de sécurité du produit : ".$product->getName());
-            $notification->setCreatedAt(new \DateTimeImmutable());
-            $notification->setIsRead(false);    
-            $manager->persist($notification);
-
         }
-
         $manager->flush();
     }
 }
