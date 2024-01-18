@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\Product;
+use App\Entity\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -16,6 +17,7 @@ use Doctrine\Persistence\ManagerRegistry;
  */
 class ProductRepository extends ServiceEntityRepository
 {
+    
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, Product::class);
@@ -24,6 +26,24 @@ class ProductRepository extends ServiceEntityRepository
 //    /**
 //     * @return Product[] Returns an array of Product objects
 //     */
+    public function findAllWithFds(): array
+    {
+        return $this->createQueryBuilder('p')
+            ->leftJoin('p.fds', 'fds')
+            ->addSelect('fds')
+            ->getQuery()
+            ->getResult();
+    }
+
+    public function findProductsForUser(User $user): array
+    {
+        return $this->createQueryBuilder('p')
+            ->join('p.users', 'u')
+            ->where('u = :user')
+            ->setParameter('user', $user)
+            ->getQuery()
+            ->getResult();
+    }
 //    public function findByExampleField($value): array
 //    {
 //        return $this->createQueryBuilder('p')

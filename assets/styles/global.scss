@@ -38,7 +38,7 @@ body {
 .table-title-text {
     margin-left: 20%;
     position: relative;
-    top: 30px !important;
+    top: 10px !important;
 }
 
 table {
@@ -51,14 +51,32 @@ table {
     align-items: center;
     align-self: center;
     justify-content: start;
-    width: 100%;
+    width: 50%;
     height: 50px;
     border-radius: 15px;
     background-color: #1eb3d1ab;
     padding: 5px;
+    margin:auto;
     margin-top: 3%;
-    margin-bottom: 3%;
+    margin-bottom: 1%;
     font-weight: 600;
+    box-shadow: 0px 4px 4px 0px #00000025;
+    color: white;
+}
+
+.product-span:hover {
+    background-color: #1e95d1ab;
+    transition: 0.2s;
+
+}
+
+.product-description {
+    display: flex;
+    align-items: center;
+    align-self: center;
+    justify-content: start;
+    width: 50%;
+    margin: auto;
 }
 
 .plus-icon {
@@ -75,3 +93,39 @@ table {
     height: 26px;
 }
 
+hr.products-line {
+    width: 50%;
+    margin: auto;
+    padding: 3px;
+}
+
+.home-link {
+    font-size: 24px;
+    font-weight: 600;
+    padding: 10px;
+    
+}
+
+.fds-title {
+    font-size: 20px;
+    font-weight: 600;
+    padding: 2px;
+}
+
+.div-sympa {
+    margin-top: 3%;
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+    height: 350px;
+    border-radius: 15px;
+    background: url(/public/images/bgacceuil.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    box-shadow: 0px 4px 4px 0px #00000025;
+}
+
+.div-sympa:hover {
+    filter: blur(2px);
+    transition: 0.2s;
+}
