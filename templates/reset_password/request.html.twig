@@ -4,7 +4,7 @@
 
 {% block body %}
 
-<body class="d-flex align-items-center justify-content-center" style="background: url('https://htmlcolorcodes.com/assets/images/html-color-codes-color-tutorials-hero.jpg');">
+<body class="d-flex align-items-center justify-content-center login-background-image">
 	<main class="form-signin w-25 m-auto p-5 card">
         {% for flash_error in app.flashes('reset_password_error') %}
             <div class="alert alert-danger" role="alert">{{ flash_error }}</div>
