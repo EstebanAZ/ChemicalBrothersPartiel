@@ -35,6 +35,7 @@ class UserFormType extends AbstractType
                 'class' => Product::class,
                 'choice_label' => 'name',
                 'multiple' => true,
+                'required' => false,
             ])
         ;
     }

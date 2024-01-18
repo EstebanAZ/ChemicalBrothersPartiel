@@ -17,7 +17,7 @@
 	</head>
 	<body style="height:100vh" class="d-flex align-items-start justify-content-start">
 
-		<div class="d-flex flex-column flex-shrink-0 p-3 bg-body-tertiary" style="width: 280px;height:100vh">
+		<div class="d-flex flex-column flex-shrink-0 p-3 bg-body-tertiary" style="width: 280px;height:100vh; position: fixed;">
 			<a href="{{ path('app_home') }}" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none">
 				<img src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png" alt="" width="32" height="32" class="rounded-circle me-2">
 				<span class="fs-4">ChemicalBrothers</span>
@@ -37,9 +37,9 @@
 					</a>
 				</li>
 				<li>
-					<a href="#" class="nav-link link-body-emphasis">
-						<i class="fa-solid fa-sitemap me-2"></i>
-						Accès aux produits
+					<a href="{{ path('app_admin_fds') }}" class="nav-link link-body-emphasis">
+						<i class="fa-solid fa-skull-crossbones me-2"></i>
+						Les fds
 					</a>
 				</li>
 				<li>
@@ -66,7 +66,7 @@
 				</ul>
 			</div>
 		</div>
-        <div class="admin-content  flex-grow-1 p-5">
+        <div class="admin-content  flex-grow-1 p-5" style="margin-left:280px">
             {# display flash messages #}
             {% for label, messages in app.flashes %}
                 {% for message in messages %}

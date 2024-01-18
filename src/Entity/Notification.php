@@ -20,7 +20,7 @@ class Notification
     private ?\DateTimeImmutable $created_at = null;
 
     #[ORM\Column(nullable: true)]
-    private ?bool $read = null;
+    private ?bool $is_read = null;
 
     #[ORM\ManyToOne(inversedBy: 'notifications')]
     #[ORM\JoinColumn(nullable: false)]
@@ -57,12 +57,12 @@ class Notification
 
     public function isRead(): ?bool
     {
-        return $this->read;
+        return $this->is_read;
     }
 
-    public function setRead(?bool $read): static
+    public function setIsRead(?bool $read): static
     {
-        $this->read = $read;
+        $this->is_read = $read;
 
         return $this;
     }
