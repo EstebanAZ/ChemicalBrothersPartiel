@@ -1,0 +1,42 @@
+{% extends 'base_header_footer.html.twig' %}
+
+{% block title %}ChemicalBrothers{% endblock %}
+
+{% block searchBar %}
+    {{ form_start(formSearch, {'attr': {'class': 'form-inline my-2 my-lg-0'}}) }}
+    {{ form_row(formSearch.keyword, {'label': false, 'attr': {'class': 'form-control mr-sm-2', 'placeholder':'Rechercher un produit'}}) }}
+    {{ form_end(formSearch) }}
+{% endblock %}
+
+{% block content %}
+    <div class="container page-content">
+        <h3 class="text-primary table-title-text">{{ search ? 'Liste des résultats pour la recherche : '~search :'Liste des produits : ' }}</h3>
+        {% if products|length == 0  %}
+            <div class="alert alert-warning mt-5 mx-5" role="alert">
+                {% if search is not empty %}
+                    Aucun résultat pour la recherche : {{ search }}
+                {% else %}
+                    Vous n'avez accès à aucun produit pour le momment
+                {% endif %}
+            </div>
+        {% endif %}
+        {% for product in products %}
+            <div class="product-span row">
+                <span class="col">{{ product.name }}</span>
+                <span class="col text-end">
+                    {% set latestFds = product.fds|sort((a, b) => b.id <=> a.id)|first %}
+                    {% if latestFds %}
+                        <a class="btn btn-outline-secondary" href="{{ path('app_fds_view', {'id': latestFds.id}) }}" target="_blank">
+                            <i class="fa-solid fa-download"></i>
+                        </a>
+                    {% endif %}
+                </span>
+            </div>
+            <hr class="products-line">
+            <div class="product-description row">
+                {{ product.description }}
+            </div>
+            
+        {% endfor %}
+    </div>
+{% endblock %}

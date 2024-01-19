@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>{% block title %}Welcome!{% endblock %}</title>
+        <script src="https://kit.fontawesome.com/5233999e8c.js" crossorigin="anonymous"></script>
+        {% block stylesheets %}
+            {{ encore_entry_link_tags('global') }}
+        {% endblock %}
+
+        {% block javascripts %}
+            {{ encore_entry_script_tags('app') }}
+        {% endblock %}
+    </head>
+    <body>
+
+        <header class="p-3 mb-3 border-bottom">
+            <div class="container">
+                <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+                    <a href="/" class="d-flex align-items-center mb-2 mb-lg-0 link-body-emphasis text-decoration-none me-5">
+                        <img src="images/logo.png" alt="" width="125" height="40">
+                    </a>
+
+                    <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
+                        <li>
+                            <a href="/" class="nav-link px-2 link-secondary text-primary">Accueil</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('app_product_list_client') }}" class="nav-link px-2 link-secondary text-primary">Produits</a>
+                        </li>
+                    </ul>
+
+                    {# <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3" role="search">
+                        <input type="search" class="form-control" placeholder="Rechercher..." aria-label="Search">
+                    </form> #}
+
+                    {% block searchBar %}{% endblock %}
+
+                    {% set unreadNotifications = app.user.notifications|filter(notification => not notification.isRead) %}
+                    <div class="dropdown">
+                        <button class="btn btn-primary position-relative mx-4 dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="fa-regular fa-bell"></i>
+                            {% if unreadNotifications|length > 0 %}
+                                <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" id="unread-count">
+                                    {{ unreadNotifications|length }}
+                                    <span class="visually-hidden">unread messages</span>
+                                </span>
+                            {% endif %}
+                        </button>
+                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton" style="width:350px;">
+                            {% if unreadNotifications|length > 0 %}
+                                {% set lastNotification = unreadNotifications|last %}
+                                {% for notification in unreadNotifications %}
+                                    <li class="p-3 d-flex justify-content-between align-items-center" id="notification-{{ notification.id }}">
+                                        <div class="fs-6">
+                                            {{ notification.message }}
+                                        </div>
+                                        <a class="btn btn-outline-secondary ms-3 mark-as-read" data-id="{{ notification.id }}"><i class="fa-regular fa-bell-slash"></i></a>
+                                    {% if notification != lastNotification %}
+                                        <hr class="dropdown-divider">
+                                    {% endif %}
+                                    </li>
+                                {% endfor %}
+                            {% else %}
+                                <li><a class="dropdown-item text-center" href="#">Aucune notification</a></li>
+                            {% endif %}
+                        </ul>
+                    </div>
+
+                    <div class="dropdown text-end">
+                        <a href="#" class="d-block link-body-emphasis text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                            <img src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png" alt="mdo" width="32" height="32" class="rounded-circle">
+                        </a>
+                        <ul class="dropdown-menu text-small">
+                            {% if is_granted('ROLE_ADMIN') %}
+                                <li>
+                                    <a class="dropdown-item" href="{{ path('app_admin') }}"><i class="fa-solid fa-lock me-2"></i>Interface Admin</a>
+                                </li>
+                                <li><hr class="dropdown-divider"></li>
+                            {% endif %}
+                            <li>
+                                <a class="dropdown-item text-danger" href="{{ path('app_logout') }}"><i class="fa-solid fa-arrow-right-from-bracket me-2"></i>Se déconnecter</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        {% block content %}{% endblock %}
+
+        <div class="container">
+            <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
+                <div class="col-md-4 d-flex align-items-center">
+                    <a href="/" class="mb-3 me-2 mb-md-0 text-body-secondary text-decoration-none lh-1">
+                        <img src="images/logo.png" alt="" width="125" height="40">
+                    </a>
+                    <span class="mb-3 mb-md-0 text-body-secondary">© 2024 ChemicalBrothers, Inc</span>
+                </div>
+
+                <ul class="nav col-md-4 justify-content-end list-unstyled d-flex">
+                    <li class="ms-3">
+                        <a class="text-body-secondary" href="#">
+                            <img src="https://1000logos.net/wp-content/uploads/2017/02/insta-logo.png" alt="" width="24" height="24">
+                        </a>
+                    </li>
+                    <li class="ms-3">
+                        <a class="text-body-secondary" href="#">
+                            <img src="https://cdn-icons-png.flaticon.com/512/61/61109.png" alt="" width="24" height="24">
+                        </a>
+                    </li>
+                    <li class="ms-3">
+                        <a class="text-body-secondary" href="#">
+                            <img src="https://cdn-icons-png.flaticon.com/512/59/59439.png" alt="" width="24" height="24">
+                        </a>
+                    </li>
+                </ul>
+            </footer>
+        </div>
+
+
+    </body>
+</html>

@@ -1,0 +1,27 @@
+{% extends 'base_admin.html.twig' %}
+
+{% block title %}Administration de l'utilisateur{% endblock %}
+
+{% block body %}
+
+<h1 class="mb-5">Administration de l'utilisateur n° {{ user.id }}</h1>
+
+<p class="fs-4">Nom d'utilisateur : <strong>{{ user.username }}</strong></p>
+
+<p class="fs-4">Adresse email : <strong>{{ user.email }}</strong></p>
+
+<p class="fs-4">Role :
+    {% if 'ROLE_ADMIN' in user.roles %}
+        <span class="badge text-bg-warning rounded-pill">Administrateur</span>
+    {% else %}
+         <span class="badge text-bg-primary rounded-pill">Client</span>
+    {% endif %}
+</p>
+<p class="fs-4 product-access">Accès aux produits :
+    {% if user.products|length is same as 0 %}-{% endif %}
+    {% for product in user.products %}
+        <span class="badge text-bg-success rounded-pill">{{ product.name }}</span>
+    {% endfor %}
+</p>
+
+{% endblock %}

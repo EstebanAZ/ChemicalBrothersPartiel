@@ -1,0 +1,23 @@
+{% extends 'base_header_footer.html.twig' %}
+
+{% block title %}ChemicalBrothers{% endblock %}
+
+{% block content %}
+    <div class="container page-content">
+        <p class="h2 text-center text-primary">Bonjour, cher {{user.username}} !</p>
+        <div style="margin-left: 5%;">
+            <a href="/products" class="nav-link link-secondary text-primary home-link">Accéder à la liste de mes produits</a>
+        </div>
+        <hr>
+
+        <div style="margin-left: 5%;">
+            <p class="fds-title">Une FDS? Kézako?</p>
+            <p class="ms-3">Une FDS (Fiche de Données de Sécurité) est un document essentiel dans le domaine industriel, 
+            fournissant des informations cruciales sur la sécurité et l'utilisation appropriée d'un produit chimique spécifique.
+            C'est un outil standardisé qui garantit une communication claire des risques associés à un produit chimique
+            et fournit des conseils sur les mesures de sécurité à prendre lors de sa manipulation.</p>
+        </div>
+        <div class="bg-primary div-sympa">
+        </div>
+    </div>
+{% endblock %}

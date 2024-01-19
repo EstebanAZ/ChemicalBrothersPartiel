@@ -1,0 +1,30 @@
+{% extends 'base_admin.html.twig' %}
+
+{% block title %}Historique des modifications{% endblock %}
+
+{% block body %}
+
+<h1 class="mb-5" >Historique des modifications</h1>
+
+
+    <p class="fs-3 mb-4">Cette fds concerne le produit : <strong>{{ fds.product.name }}</strong></p>
+
+    <p class="fs-4">Version actuelle :</p>
+        
+        {% set current_fds = fds %}
+        {% for i in 0..100 %}
+            {% if current_fds is not null %}
+                <p>Document : <a href="{{ path('app_fds_view', {'id': current_fds.id}) }}" target="_blank" class="btn btn-secondary"><i class="fa-solid fa-download me-2"></i>Voir le document</a></p>
+                <p>Date de création : <span class="badge text-bg-primary rounded-pill">{{ current_fds.createdAt|date('d-m-Y à H:i') }}</span></p>
+                {% set current_fds = current_fds.parent %}
+                {% if current_fds is not null %}
+                        <hr class="hr my-5" />
+                        <p class="fs-4">Version précédente :</p>
+                {% endif %}
+            {% endif %}
+        {% endfor %}
+ 
+
+
+
+{% endblock %}

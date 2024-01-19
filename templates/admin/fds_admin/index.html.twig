@@ -1,0 +1,35 @@
+{% extends 'base_admin.html.twig' %}
+
+{% block title %}Administration des fds{% endblock %}
+
+{% block body %}
+
+<h1>Administration des fiches de sécurité</h1>
+
+<a href="{{ path('app_admin_fds_create') }}" class="btn btn-success">Ajouter une fiche</a>
+
+<table class="table table-striped my-3">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Produit</th>
+            <th>Dernière mise à jour</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for fds in fdsList %}
+            <tr>
+                <td>{{ fds.id }}</td>
+                <td>{{ fds.product.name }}</td>
+                <td>{{ fds.createdAt|date('d/m/Y') }}</td>
+                <td>
+                    <a href="{{ path('app_fds_view', {'id': fds.id}) }}" target="_blank" class="btn btn-secondary"><i class="fa-solid fa-download"></i></a>
+                    <a href="{{ path('app_admin_fds_edit', {'id': fds.id}) }}" class="btn btn-primary"><i class="fa-regular fa-pen-to-square"></i></a>
+                    <a href="{{ path('app_admin_fds_hystory', {'id': fds.id}) }}" class="btn btn-warning"><i class="fa-solid fa-clock-rotate-left"></i></a>
+                </td>
+            </tr>
+        {% endfor %}
+    </tbody>
+
+{% endblock %}

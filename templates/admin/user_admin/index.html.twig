@@ -1,0 +1,49 @@
+{% extends 'base_admin.html.twig' %}
+
+{% block title %}Administration des utilisateurs{% endblock %}
+
+{% block body %}
+
+<h1>Administration des utilisateurs</h1>
+
+<table class="table table-striped my-3">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Nom d'utilisateur</th>
+            <th>Email</th>
+            <th>Roles</th>
+            <th>Accès aux produits</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for user in users %}
+            <tr>
+                <td>{{ user.id }}</td>
+                <td>{{ user.username }}</td>
+                <td>{{ user.email }}</td>
+                <td>
+                {% if 'ROLE_ADMIN' in user.roles %}
+                    <span class="badge text-bg-warning rounded-pill">Administrateur</span>
+                {% else %}
+                   <span class="badge text-bg-primary rounded-pill">Client</span>
+                {% endif %}
+                </td>
+                <td style="max-width: 200px;overflow: auto;">
+                    {% if user.products|length is same as 0 %}-{% endif %}
+                    
+                    {% for product in user.products %}
+                        <span class="badge text-bg-success rounded-pill">{{ product.name }}</span>
+                    {% endfor %}
+                </td>
+                <td>
+                    <a href="{{ path('app_admin_user_show', {'id': user.id}) }}" class="btn btn-info"><i class="fa-regular fa-eye"></i></a>
+                    <a href="{{ path('app_admin_user_edit', {'id': user.id}) }}" class="btn btn-warning"><i class="fa-regular fa-pen-to-square"></i></a>
+                    <a onclick="return confirm('Voulez vous vraiment supprimer cet utilisateur ?')"  href="{{ path('app_admin_user_delete', {'id': user.id}) }}" class="btn btn-danger"><i class="fa-solid fa-trash"></i></a>
+                </td>
+            </tr>
+        {% endfor %}
+    </tbody>
+
+{% endblock %}

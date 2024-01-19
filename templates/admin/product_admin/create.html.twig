@@ -1,0 +1,30 @@
+{% extends 'base_admin.html.twig' %}
+
+{% block title %}Administration des produits{% endblock %}
+
+{% block body %}
+
+    <h1 class="mb-5">{{ new ? 'Creation d\'un produit' : 'Modification d\'un produit'}}</h1>
+
+    {{ form_start(productForm) }}
+
+        {{ form_row(productForm.name, {
+            'label': 'Nom du produit',
+            'attr': {
+                'placeholder': 'Nom du produit',
+                'class': 'form-control mb-3'
+            }
+        }) }}
+        {{ form_row(productForm.description, {
+            'label': 'Description du produit',
+            'attr': {
+                'placeholder': 'Description du produit',
+                'class': 'form-control mb-3'
+            }
+        }) }}
+        <button type="submit" class="btn btn-success">Ajouter</button>
+    {{ form_end(productForm) }}
+
+ 
+
+{% endblock %}
