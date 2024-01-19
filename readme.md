@@ -14,9 +14,10 @@ L'entreprise ChemicalBrothers souhaite mettre en place une GED pour mettre à di
 ## Database Configuration
 
 1. Create a new file `.env.local`.
-2. Open the `.env.local` file and update the following line with your MySQL database connection information:
+2. Open the `.env.local` file and update the following line with your MySQL database connection information And Mailer information (you can use [MailTrap](https://mailtrap.io/home) for testing):
     ```
     DATABASE_URL=mysql://your_username:your_password@your_host:your_port/your_database_name?serverVersion=8.0.32&charset=utf8mb4
+    MAILER_URL=smtp://{user}:{password}@{server}:{port}
     ```
 3. Run the following command to create the MySQL database.
     ```shel
