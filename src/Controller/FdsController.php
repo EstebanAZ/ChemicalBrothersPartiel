@@ -27,7 +27,7 @@ class FdsController extends AbstractController
         $user = $security->getUser();
         $product = $fds->getProduct();
 
-        if($em->getRepository(Fds::class)->isFdsAccessible($user, $product)){
+        if($em->getRepository(Fds::class)->isFdsAccessible($user, $product) || $this->isGranted('ROLE_ADMIN')){
             return new Response(file_get_contents($filePath), 200, [
                 'Content-Type' => 'application/pdf'
             ]);
